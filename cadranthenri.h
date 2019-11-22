@@ -10,12 +10,14 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    int toursMinute;
     QString styleTexte;
 
     int epesseurTraitVitesse;
     int tailleTexteVitesse;
 
+    int toursMinute;
+    int toursMinuteMax;
+    int epesseurTraitToursMinure;
     int tailleTextetoursMinute;
 };
 
