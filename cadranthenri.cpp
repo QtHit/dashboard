@@ -12,6 +12,8 @@ cadrantHenri::cadrantHenri(cadrantVirtuel *parent):cadrantVirtuel (parent)
     tailleTexteVitesse=27;
 
     tailleTextetoursMinute=20;
+    toursMinute=0;
+    toursMinuteMax=8000;
 }
 QRectF cadrantHenri::boundingRect() const
 {
@@ -20,6 +22,9 @@ QRectF cadrantHenri::boundingRect() const
 
 void cadrantHenri::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+
+
+
 
 //.....création des carrés de fond pour le disigne du cadrant........................
 
@@ -120,11 +125,11 @@ void cadrantHenri::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
         painter->drawArc(carre[9],i*16,10);
         }
 
-    float green=qMin(250.0,-25.0/140*toursMinute+250*54.0/14);//variation de la couleur verte
-    float blue=qMin(250.0, qMax(0.0,-25.0/130*toursMinute+25.0*400/13) );//variation de la couleur bleu
+    float green=qMax(qMin(255.0,-4.0*255/toursMinuteMax*toursMinute+4*255),0.0);//variation de la couleur verte
+    float blue=qMin(250.0, qMax(0.0,-4.0*255/toursMinuteMax*toursMinute+3*255) );//variation de la couleur bleu
     painter->setPen(QPen(QBrush(QColor(250 , green , blue , 255 )) , 20, Qt::SolidLine,Qt::FlatCap));
 
-    for (int i=225;i>224-(toursMinute/20);i-=1)
+    for (int i=225;i>224-qMin(270,(toursMinute/20*5400/toursMinuteMax));i-=1)
         {
         painter->drawArc(carre[9],i*16,10);
         }
@@ -142,7 +147,7 @@ void cadrantHenri::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     painter->setPen(QPen(QBrush(QColor(250 , green , blue , 255 )) , 20, Qt::SolidLine,Qt::FlatCap));
     painter->setFont(QFont(styleTexte, tailleTextetoursMinute , -1,false));
     j=0;
-    for (float i=35*pi/28;i>-7*pi/28;i-=6*pi/(27*4))
+    for (float i=35*pi/28;i>-7*pi/28;i-=6*pi/(27*4)*5400/toursMinuteMax)
     {
         painter->drawText(qCos(i)*220-16,-qSin(i)*220+5,QString("%1").arg(j));
         j+=2;
