@@ -13,7 +13,7 @@ cadrantHenri::cadrantHenri(cadrantVirtuel *parent):cadrantVirtuel (parent)
 
     tailleTextetoursMinute=20;
     toursMinute=0;
-    toursMinuteMax=8000;
+    toursMinuteMax=5400;
 }
 QRectF cadrantHenri::boundingRect() const
 {
